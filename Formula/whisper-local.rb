@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc6/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "d597a8c747010fb5d37f61e1e312e86d2addce28ef580ef0fae67a409f56da7a"
-  version "0.1.0-rc6"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc7/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "b829cc0e8ca4c73decc3b0fc1b26e274546ee126c9af7dc5f4e0211cca141de9"
+  version "0.1.0-rc7"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,8 +14,8 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc6/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "f47e8b4b8d4117794d501f99c43088303d72d0de703cb970bb2bc3d98e8df419"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc7/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "abbee82c4dac00c632787f39c92edbd62e22fd79c8f57d3924c49a87b7555676"
   end
 
   def install
@@ -24,10 +24,8 @@ class WhisperLocal < Formula
     wheel_name = cached_download.basename.to_s.sub(/\A[0-9a-f]{64}--/i, "")
     wheel_path = buildpath/wheel_name
     cp cached_download, wheel_path
-    # Install wheel without deps to create entry point scripts.
-    # Dependencies are installed in post_install to avoid Homebrew's dylib
-    # relinking on pip wheels with bundled native libs (e.g. PyAV's FFmpeg).
-    venv.pip_install wheel_path
+    # Install wheel with dependencies from PyPI (venv.pip_install uses --no-deps)
+    system libexec/"bin/pip", "install", "--no-cache-dir", wheel_path
 
     resource("whisper-local-tui").stage do
       (libexec/"bin").install "whisper-local-tui"
@@ -38,16 +36,6 @@ class WhisperLocal < Formula
     if (libexec/"bin/whisper.local").exist?
       (bin/"whisper.local").write_env_script libexec/"bin/whisper.local", WHISPER_LOCAL_TUI_BIN: libexec/"bin/whisper-local-tui"
     end
-  end
-
-  def post_install
-    # Install Python dependencies after Homebrew's linkage fixup has run.
-    # Pip wheels like PyAV bundle native dylibs with short placeholder IDs
-    # that can't accommodate the full Cellar path, causing relinking failures.
-    system libexec/"bin/pip", "install", "--no-cache-dir",
-           "faster-whisper>=1.0.0", "huggingface-hub>=0.24.0", "numpy>=1.24.0",
-           "pyobjc-framework-Quartz>=9.0", "pyperclip>=1.8.2", "sounddevice>=0.4.6",
-           "textual>=0.60.0", "tomli-w>=1.0.0", "websockets>=12.0"
   end
 
   def caveats
