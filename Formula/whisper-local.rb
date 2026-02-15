@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc1/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "b62e49e3c0986abbdce7f7fb7a7ba3bd992b5d883297c082de49421c382cc542"
-  version "0.1.0-rc1"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc2/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "4cad1135e2be54f34c718de450fbb12c8033e9d9e53d3bafead1870759ed52af"
+  version "0.1.0-rc2"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,13 +14,17 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc1/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "7802b4c697159ca28ed2c0a26ec002e70629d54af8aa91a134515eec32f78d50"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc2/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "9736dbe2f0578bb7d1e759aa11e0b24b702cfde6dd3114eeb2caac83bf4d157c"
   end
 
   def install
     venv = virtualenv_create(libexec, "python3.12")
-    venv.pip_install cached_download
+    # Strip Homebrew's SHA256 cache prefix to restore PEP 427 wheel filename for pip
+    wheel_name = cached_download.basename.to_s.sub(/\A[0-9a-f]{64}--/i, "")
+    wheel_path = buildpath/wheel_name
+    cp cached_download, wheel_path
+    venv.pip_install wheel_path
 
     resource("whisper-local-tui").stage do
       (libexec/"bin").install "whisper-local-tui"
