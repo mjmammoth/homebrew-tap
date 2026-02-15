@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc4/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "01f65718e3182eba43951a774258af2bcc807b887e3cc16291959bbbbb232fcf"
-  version "0.1.0-rc4"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc5/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "01813f5e3d7195b8520aaf7d5af3b64206635cdb5e39805cfd59a80438ed7eb6"
+  version "0.1.0-rc5"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,8 +14,8 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc4/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "737b8ae68e7ddc9be57bf76b7106fd51f2b2e980de567fb23841dcf092eef56f"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc5/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "ecf6fadde72186b213a9e7bce994ae56e4f8953f62849ddef745fb2239e1a2d2"
   end
 
   def install
@@ -27,6 +27,13 @@ class WhisperLocal < Formula
     # Install wheel with dependencies from PyPI (venv.pip_install uses --no-deps)
     system "python3.12", "-m", "pip", "--python=#{libexec}/bin/python",
            "install", "--no-cache-dir", wheel_path
+
+    # Fix bundled dylib IDs to use @loader_path so Homebrew skips relinking.
+    # Pip wheels bundle native libs with short placeholder IDs that can't
+    # accommodate the full Cellar path due to Mach-O header size limits.
+    Dir.glob(libexec/"lib/python3.12/site-packages/**/*.dylib") do |dylib|
+      quiet_system "install_name_tool", "-id", "@loader_path/#{File.basename(dylib)}", dylib
+    end
 
     resource("whisper-local-tui").stage do
       (libexec/"bin").install "whisper-local-tui"
