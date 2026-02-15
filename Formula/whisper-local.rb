@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc8/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "06d71ab4d942a98df7e4060c448ff100d0bcdbdd863961a2e983859f01e51ae7"
-  version "0.1.0-rc8"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "f2e591a01b6b870fb368eddea05a846314fadcffb7fc9bd30c836bd8da25c832"
+  version "0.1.0"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,8 +14,8 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc8/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "e96cd35f585d488456bb24031140fbac4baa1320d3809b8e76659ca815ac67f2"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "8ab7baa91dc54c865bde0b940bb52aa4a62eaa168a15e310bc1265adf7a21a38"
   end
 
   def install
