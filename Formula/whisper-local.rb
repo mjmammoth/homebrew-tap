@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc2/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "4cad1135e2be54f34c718de450fbb12c8033e9d9e53d3bafead1870759ed52af"
-  version "0.1.0-rc2"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc3/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "243b6a8a2d94506b1974d596a8402224b29d1890d4a4988d67a082ceb7f18677"
+  version "0.1.0-rc3"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,8 +14,8 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc2/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "9736dbe2f0578bb7d1e759aa11e0b24b702cfde6dd3114eeb2caac83bf4d157c"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.0-rc3/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "b1d93bf62e3be42e682cef5a28a36904bbcf6f71e36a8295313305fb45633eb0"
   end
 
   def install
@@ -24,7 +24,9 @@ class WhisperLocal < Formula
     wheel_name = cached_download.basename.to_s.sub(/\A[0-9a-f]{64}--/i, "")
     wheel_path = buildpath/wheel_name
     cp cached_download, wheel_path
-    venv.pip_install wheel_path
+    # Install wheel with dependencies from PyPI (venv.pip_install uses --no-deps)
+    system "python3.12", "-m", "pip", "--python=#{libexec}/bin/python",
+           "install", "--no-cache-dir", wheel_path
 
     resource("whisper-local-tui").stage do
       (libexec/"bin").install "whisper-local-tui"
