@@ -3,9 +3,9 @@ class WhisperLocal < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.1-rc4/whisper_local-0.1.0-py3-none-any.whl"
-  sha256 "a7b4912a185129683999a5d8bf090719c0b27506a6cd53d197653d403ce69a73"
-  version "0.1.1-rc4"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.1-rc5/whisper_local-0.1.0-py3-none-any.whl"
+  sha256 "b8408ded4a62fb285cc35c92a2239ee55bed0e44de87c6aab202021871cd1115"
+  version "0.1.1-rc5"
   license "MIT"
 
   depends_on arch: :arm64
@@ -14,8 +14,8 @@ class WhisperLocal < Formula
   depends_on "whisper-cpp"
 
   resource "whisper-local-tui" do
-    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.1-rc4/whisper-local-tui-darwin-arm64.tar.gz"
-    sha256 "5350af99a8dcec616f1a584aa342c58aed8efb8cd3294c15dbaf7dc66b48024d"
+    url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.1-rc5/whisper-local-tui-darwin-arm64.tar.gz"
+    sha256 "5576f115ca831348f1b3eaddabbf0cb14e261156e728f44c2b12a8f2e3742095"
   end
 
   def install
@@ -34,6 +34,7 @@ class WhisperLocal < Formula
     Dir.glob(libexec/"lib/python3.12/site-packages/**/*.dylib", File::FNM_DOTMATCH) do |dylib|
       chmod 0644, dylib
       system "install_name_tool", "-id", "@loader_path/#{File.basename(dylib)}", dylib
+      system "codesign", "--force", "--sign", "-", dylib
     end
 
     resource("whisper-local-tui").stage do
