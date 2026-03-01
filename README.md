@@ -1,7 +1,11 @@
 # homebrew-tap
 
-Homebrew tap for whisper.local.
+```bash
+brew install mjmammoth/tap/murmur
+```
 
-## Usage
-brew tap mjmammoth/tap
-brew install whisper-local
+Or,  for pre-release versions
+
+```bash
+brew install mjmammoth/tap/murmur-preview
+```
