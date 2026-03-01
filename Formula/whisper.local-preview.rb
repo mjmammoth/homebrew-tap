@@ -5,8 +5,8 @@ class WhisperLocalPreview < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/whisper.local"
-  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev1/whisper_local-0.1.4.dev1-py3-none-any.whl"
-  sha256 "38debabe936eb3d99b05283d989207912a28de5662828d03463381441fe46f16"
+  url "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev2/whisper_local-0.1.4.dev2-py3-none-any.whl"
+  sha256 "09c4500281084b598591583e0c1562db7822d35f8ec02381920db3f1bf9ea4b7"
   license "MIT"
 
   depends_on "portaudio"
@@ -45,22 +45,22 @@ class WhisperLocalPreview < Formula
     tui_assets = {
       darwin: {
         arm:   [
-          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev1/whisper-local-tui-darwin-arm64.tar.gz",
-          "a0cfb72f5d375f7efb4c7bd42dfba1ab13646ea9cbc92ddd0d5369cd8511651a",
+          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev2/whisper-local-tui-darwin-arm64.tar.gz",
+          "594f089634c5e1da53af41d99c3e63fce8bbb0412125b12f0a392df48211272d",
         ],
         intel: [
-          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev1/whisper-local-tui-darwin-x64.tar.gz",
-          "98865d428390035aeb1621d5cae0b3bdb3b7060d966c349161442a7695ada26a",
+          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev2/whisper-local-tui-darwin-x64.tar.gz",
+          "b5a8181eefa472f1b8fc262fe04dd8de0346d59452fa4526208b46bf6975b7bf",
         ],
       },
       linux:  {
         arm:   [
-          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev1/whisper-local-tui-linux-arm64.tar.gz",
-          "59dee860e480457d57aca516fa56367564969c3db8548130abcc80fae130a1e4",
+          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev2/whisper-local-tui-linux-arm64.tar.gz",
+          "3043be90480b4889225351cd6d9cf767b0c17c8abb9b46c31c8f1fdcff2cd986",
         ],
         intel: [
-          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev1/whisper-local-tui-linux-x64.tar.gz",
-          "14bd9660d93a40dc72ac9bc7c0fbc33f2a8363c2384a0b51de82f5894a1a31fb",
+          "https://github.com/mjmammoth/whisper.local/releases/download/v0.1.4.dev2/whisper-local-tui-linux-x64.tar.gz",
+          "190113bb80d841ee43de90cbb32b1c53ab9a13f3aa7b7e75298e0412c60a4c56",
         ],
       },
     }
