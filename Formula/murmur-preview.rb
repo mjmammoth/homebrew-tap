@@ -5,8 +5,8 @@ class MurmurPreview < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/murmur"
-  url "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev3/murmur-0.1.4.dev3-py3-none-any.whl"
-  sha256 "95973eaed2c9c351dec059a2fe6bda94b3fa454eaa4a9f0c458cefe421fd4273"
+  url "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev4/murmur-0.1.4.dev4-py3-none-any.whl"
+  sha256 "1f384e62e6f181fa4b4f7eb44c9e6483043b180cb6a6534104c83ae5fddd173a"
   license "MIT"
 
   depends_on "portaudio"
@@ -45,22 +45,22 @@ class MurmurPreview < Formula
     tui_assets = {
       darwin: {
         arm:   [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev3/murmur-tui-darwin-arm64.tar.gz",
-          "37d4ecb886bbca9543a7ec70b53722d1d8b60d53b7613fb8c38c06cc4e939309",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev4/murmur-tui-darwin-arm64.tar.gz",
+          "8fdce5a29202a41c07b8d3241d7062e67336aada428e0b8ab5016767ab1b3ca7",
         ],
         intel: [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev3/murmur-tui-darwin-x64.tar.gz",
-          "5b9e6a365ce6b42bb28fb3ccf2158f8cd42deee86c94fa5f5e0748352ef37d02",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev4/murmur-tui-darwin-x64.tar.gz",
+          "450972833be889a88883bdb847942f22ee80e8edd9425831cf97062b55b9ff58",
         ],
       },
       linux:  {
         arm:   [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev3/murmur-tui-linux-arm64.tar.gz",
-          "1e0eec5f933d91ab6a5eeb251f2e4724decbd0590bb9f9d9770a7658831723cf",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev4/murmur-tui-linux-arm64.tar.gz",
+          "46fe9190666f9366db83ff04401cd938908d456c2d3cc9448d36fee649df3250",
         ],
         intel: [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev3/murmur-tui-linux-x64.tar.gz",
-          "46014e6a7ec5e83d2da5e164b9303c5538aba1c11e882d07dc40e475738d7d80",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev4/murmur-tui-linux-x64.tar.gz",
+          "e9e3b361d65f4f1957be4f1c1e216d7f1443c68bcb1c23abf1a813ce44d40255",
         ],
       },
     }
