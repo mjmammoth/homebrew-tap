@@ -5,8 +5,8 @@ class MurmurPreview < Formula
 
   desc "Local real-time voice transcription TUI using Whisper"
   homepage "https://github.com/mjmammoth/murmur"
-  url "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev6/murmur-0.1.4.dev6-py3-none-any.whl"
-  sha256 "cd68ccb83532ec0280bb2371dc9bffbb3c79fb07be44d33dc7464c79f71701b5"
+  url "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev7/murmur-0.1.4.dev7-py3-none-any.whl"
+  sha256 "1bc72fc3e13f2dc099bebd5b6ae5b4cf8b452a481fa4c7de9313e4e79c94d38b"
   license "MIT"
 
   depends_on "portaudio"
@@ -45,22 +45,22 @@ class MurmurPreview < Formula
     tui_assets = {
       darwin: {
         arm:   [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev6/murmur-tui-darwin-arm64.tar.gz",
-          "d6b76c062b1f51dff15290cbab383b74a6073da7e6d882f0b6610c23ff1843d9",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev7/murmur-tui-darwin-arm64.tar.gz",
+          "de6e43886f6b770e360d1e73beae7022e1773f0371354afeb68f167b43cc924c",
         ],
         intel: [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev6/murmur-tui-darwin-x64.tar.gz",
-          "a10466c4160decf53a4925a770177902aedcbd5906d560b0b82918c076443fce",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev7/murmur-tui-darwin-x64.tar.gz",
+          "d951bd2dc274f9c9f5c592d80ec16873f5c76d99444de1672a55a7d79d28f0c6",
         ],
       },
       linux:  {
         arm:   [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev6/murmur-tui-linux-arm64.tar.gz",
-          "24c2f04c1e6a6cb4014304f160a440e7275fc1080bebce343834a0f455299ba5",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev7/murmur-tui-linux-arm64.tar.gz",
+          "9cd97c04a84fdea25a6213e4691365ba0f9aa9e00a1724dcb25c5d3b1cd74c91",
         ],
         intel: [
-          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev6/murmur-tui-linux-x64.tar.gz",
-          "055a60dcbb073d97109ec528425d6bd1d1a03b87a7cbb63998226f955f02933a",
+          "https://github.com/mjmammoth/murmur/releases/download/v0.1.4.dev7/murmur-tui-linux-x64.tar.gz",
+          "48efa4d0a302fd820824e75a5c68a0820810c8c84564f3e9f3ed8cf305b2301e",
         ],
       },
     }
@@ -134,6 +134,6 @@ class MurmurPreview < Formula
 
   test do
     assert_match "usage", shell_output("#{bin}/murmur --help")
-    assert_match "Service", shell_output("#{bin}/murmur status")
+    assert_match(/running|stale|stopped/, shell_output("#{bin}/murmur status"))
   end
 end
